@@ -109,7 +109,7 @@ BlacFiles/
 | SCP      | `com.jcraft:jsch`               | 0.1.55  | Uses exec channel + SCP wire protocol |
 | FTP      | `commons-net:commons-net`       | 3.6     | Passive mode required for NAT/BB10 Wi-Fi |
 | FTPS     | `commons-net:commons-net`       | 3.6     | FTPSClient with `true` for implicit TLS |
-| WebDAV   | `com.thegrizzlylabs.sardine-android:sardine-android` | 0.8 | HttpURLConnection-based, Java 7 safe |
+| WebDAV   | `com.github.thegrizzlylabs:sardine-android` | 0.8 | HttpURLConnection-based, Java 7 safe |
 | SMB      | `eu.agno3.jcifs:jcifs-ng`       | 2.1.6   | Java 7 fork; disable DFS; SMB1 fallback |
 
 See `.agents/protocols.md` for connection timeout settings and known BB10 TLS quirks.

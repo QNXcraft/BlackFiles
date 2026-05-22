@@ -45,7 +45,7 @@ public final class DriverFactory {
      * Used by FileOperationQueue when it only knows the source FileItem's protocol.
      * Returns the first matching driver, or null.
      */
-    public static synchronized RemoteDriver getActiveDriver(String protocolName) {
+    public static synchronized RemoteDriver getActiveDriverByProtocol(String protocolName) {
         for (RemoteDriver drv : activeDrivers.values()) {
             // Match by class name convention: SftpDriver, FtpDriver, etc.
             String className = drv.getClass().getSimpleName().toUpperCase();

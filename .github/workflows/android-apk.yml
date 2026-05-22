@@ -30,11 +30,17 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Install 32-bit libraries
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y libc6:i386 libstdc++6:i386 lib32z1
+
       - name: Install Android SDK components
         run: |
           sdkmanager --install \
             "platforms;android-18" \
-            "build-tools;18.1.1"
+            "build-tools;19.1.0"
 
       - name: Write local.properties
         run: echo "sdk.dir=$ANDROID_HOME" > local.properties
@@ -91,11 +97,17 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Install 32-bit libraries
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y libc6:i386 libstdc++6:i386 lib32z1
+
       - name: Install Android SDK components
         run: |
           sdkmanager --install \
             "platforms;android-18" \
-            "build-tools;18.1.1"
+            "build-tools;19.1.0"
 
       - name: Write local.properties
         run: echo "sdk.dir=$ANDROID_HOME" > local.properties
