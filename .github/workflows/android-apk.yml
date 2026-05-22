@@ -34,7 +34,7 @@ jobs:
         run: |
           sdkmanager --install \
             "platforms;android-18" \
-            "build-tools;18.1.1"
+            "build-tools;19.1.0"
 
       - name: Write local.properties
         run: echo "sdk.dir=$ANDROID_HOME" > local.properties
@@ -95,7 +95,7 @@ jobs:
         run: |
           sdkmanager --install \
             "platforms;android-18" \
-            "build-tools;18.1.1"
+            "build-tools;19.1.0"
 
       - name: Write local.properties
         run: echo "sdk.dir=$ANDROID_HOME" > local.properties
