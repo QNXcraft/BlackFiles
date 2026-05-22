@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Remote connection form dialog layout -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Protocol picker -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Protocol"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinner_protocol"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="12dp"
+            android:focusable="true" />
+
+        <!-- Display name -->
+        <EditText
+            android:id="@+id/et_display_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Display name (e.g. Home Server)"
+            android:inputType="text"
+            android:layout_marginBottom="8dp"
+            android:focusable="true" />
+
+        <!-- Host -->
+        <EditText
+            android:id="@+id/et_host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Hostname / IP address"
+            android:inputType="textUri"
+            android:layout_marginBottom="8dp"
+            android:focusable="true" />
+
+        <!-- Port -->
+        <EditText
+            android:id="@+id/et_port"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Port"
+            android:inputType="number"
+            android:layout_marginBottom="8dp"
+            android:focusable="true" />
+
+        <!-- Username -->
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:inputType="textNoSuggestions"
+            android:layout_marginBottom="8dp"
+            android:focusable="true" />
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_marginBottom="8dp"
+            android:focusable="true" />
+
+        <!-- Private key path (optional, SFTP/SCP only) -->
+        <EditText
+            android:id="@+id/et_private_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Private key path (optional)"
+            android:inputType="textUri"
+            android:layout_marginBottom="8dp"
+            android:focusable="true" />
+
+        <!-- Initial path -->
+        <EditText
+            android:id="@+id/et_initial_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Initial path (e.g. /home/user)"
+            android:inputType="textUri"
+            android:focusable="true" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Single file/folder row in the file list.
+    RelativeLayout: icon | name + subtitle | size label
+
+    android:focusable="true" is required for keyboard D-pad navigation on BB10.
+    The background selector provides a visible focus ring for keyboard users.
+-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@drawable/list_item_selector"
+    android:focusable="true"
+    android:focusableInTouchMode="false"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:descendantFocusability="blocksDescendants">
+
+    <!-- File type / directory icon -->
+    <ImageView
+        android:id="@+id/file_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_file"
+        android:scaleType="fitCenter"
+        android:focusable="false" />
+
+    <!-- Multi-select checkbox — hidden when not in selection mode -->
+    <CheckBox
+        android:id="@+id/file_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:focusable="false"
+        android:clickable="false" />
+
+    <!-- File name -->
+    <TextView
+        android:id="@+id/file_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/file_icon"
+        android:layout_toLeftOf="@id/file_checkbox"
+        android:layout_alignTop="@id/file_icon"
+        android:layout_marginLeft="12dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp"
+        android:focusable="false" />
+
+    <!-- File size / last modified subtitle -->
+    <TextView
+        android:id="@+id/file_meta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/file_icon"
+        android:layout_toLeftOf="@id/file_checkbox"
+        android:layout_below="@id/file_name"
+        android:layout_marginLeft="12dp"
+        android:singleLine="true"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:focusable="false" />
+
+</RelativeLayout>

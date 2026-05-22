@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Focus / pressed / selected selector for file list rows.
+    BB10 physical keyboard navigation relies on the "focused" state for
+    visible highlight.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Focused via keyboard / trackpad -->
+    <item android:state_focused="true"  android:drawable="@color/item_focused" />
+    <!-- Pressed by touch -->
+    <item android:state_pressed="true"  android:drawable="@color/item_pressed" />
+    <!-- Selected (multi-select active) -->
+    <item android:state_selected="true" android:drawable="@color/item_selected" />
+    <!-- Default state -->
+    <item android:drawable="@color/bg_primary" />
+</selector>

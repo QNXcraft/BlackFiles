@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 18
+    buildToolsVersion "18.1.1"
+
+    defaultConfig {
+        applicationId "com.blacfiles.filemanager"
+        minSdkVersion 18
+        targetSdkVersion 18
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    // Exclude conflicting META-INF files from dependency jars
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+}
+
+dependencies {
+    // SFTP / SCP — JSch 0.1.55 (Java 7 compatible)
+    compile 'com.jcraft:jsch:0.1.55'
+
+    // FTP / FTPS — Apache Commons Net 3.6 (Java 7 compatible)
+    compile 'commons-net:commons-net:3.6'
+
+    // SMB — jcifs-ng 2.1.6 (API 18 compatible fork)
+    compile 'eu.agno3.jcifs:jcifs-ng:2.1.6'
+
+    // WebDAV — Sardine Android (uses HttpURLConnection, Java 7 compatible)
+    compile 'com.thegrizzlylabs.sardine-android:sardine-android:0.8'
+
+    // JSON serialization for prefs (org.json is available on API 18 already,
+    // but we include a standalone copy for unit-testability outside Android)
+    compile 'org.json:json:20180813'
+
+    // Support library — needed for DrawerLayout (android.support.v4.widget.DrawerLayout)
+    compile 'com.android.support:support-v4:18.0.0'
+}

@@ -1,0 +1,127 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - 'v*'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  debug-prerelease:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK components
+        run: |
+          sdkmanager --install \
+            "platforms;android-34" \
+            "build-tools;34.0.0"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.4
+
+      - name: Write local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
+
+      - name: Build debug APK
+        run: gradle --no-daemon --stacktrace clean assembleDebug
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk blackfiles-debug.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blackfiles-debug-apk
+          path: blackfiles-debug.apk
+          if-no-files-found: error
+
+      - name: Publish debug prerelease
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')
+        uses: ncipollo/release-action@v1
+        with:
+          tag: debug-latest
+          name: "BlackFiles Debug (Prerelease)"
+          body: "Automated debug build from commit ${{ github.sha }} on ${{ github.ref_name }}."
+          prerelease: true
+          allowUpdates: true
+          removeArtifacts: true
+          artifacts: blackfiles-debug.apk
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  latest-release:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK components
+        run: |
+          sdkmanager --install \
+            "platforms;android-34" \
+            "build-tools;34.0.0"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.4
+
+      - name: Write local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
+
+      - name: Build release APK
+        run: gradle --no-daemon --stacktrace clean assembleRelease
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/release/*.apk BlackFiles.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: BlackFiles-apk
+          path: BlackFiles.apk
+          if-no-files-found: error
+
+      - name: Publish APK to GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: latest
+          name: "BlackFiles Latest Build"
+          body: "Automated release build from commit ${{ github.sha }} on tag ${{ github.ref_name }}.\n\nThis release is automatically updated when tags matching v* are pushed."
+          prerelease: false
+          allowUpdates: true
+          removeArtifacts: true
+          artifacts: BlackFiles.apk
+          token: ${{ secrets.GITHUB_TOKEN }}

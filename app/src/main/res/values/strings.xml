@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BlacFiles</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="section_favorites">Favorites</string>
+    <string name="section_local">Local Storage</string>
+    <string name="section_network">Network</string>
+    <string name="add_connection">Add Remote Connection…</string>
+    <string name="internal_storage">Internal Storage</string>
+    <string name="sd_card">SD Card</string>
+    <string name="empty_folder">Empty folder</string>
+    <string name="loading">Loading…</string>
+    <string name="error_connect">Connection failed</string>
+    <string name="rename_hint">New name</string>
+    <string name="dialog_rename_title">Rename</string>
+    <string name="dialog_delete_title">Delete</string>
+    <string name="dialog_delete_message">Delete %1$d item(s)?</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="sort_name_asc">Name A→Z</string>
+    <string name="sort_name_desc">Name Z→A</string>
+    <string name="sort_date_asc">Oldest first</string>
+    <string name="sort_date_desc">Newest first</string>
+    <string name="sort_size_asc">Smallest first</string>
+    <string name="sort_size_desc">Largest first</string>
+    <string name="sort_type">By type</string>
+</resources>

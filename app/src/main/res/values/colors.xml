@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Dark theme colour palette.
+    All colours are referenced by name so theme adjustments are in one place.
+-->
+<resources>
+    <!-- Backgrounds -->
+    <color name="bg_primary">#FF1A1A1A</color>
+    <color name="toolbar_bg">#FF252525</color>
+    <color name="drawer_bg">#FF1E1E1E</color>
+    <color name="drawer_header_bg">#FF111111</color>
+
+    <!-- Text -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#FF9E9E9E</color>
+    <color name="text_accent">#FF4CAF50</color>
+
+    <!-- List item states -->
+    <color name="item_focused">#553A7BD6</color>   <!-- Blue tint for keyboard focus -->
+    <color name="item_pressed">#554CAF50</color>   <!-- Green tint for touch press -->
+    <color name="item_selected">#4400BCD4</color>  <!-- Cyan tint for multi-select -->
+
+    <!-- Misc -->
+    <color name="divider">#FF303030</color>
+</resources>

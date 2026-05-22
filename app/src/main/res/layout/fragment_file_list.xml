@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Fragment layout for the file list pane.
+    RelativeLayout allows the ProgressBar overlay to sit on top of the ListView.
+-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary">
+
+    <ListView
+        android:id="@+id/file_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/divider"
+        android:dividerHeight="1px"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:drawSelectorOnTop="false"
+        android:choiceMode="multipleChoice"
+        android:scrollbars="vertical"
+        android:fastScrollEnabled="true" />
+
+    <!-- Loading spinner overlay — GONE when not loading -->
+    <FrameLayout
+        android:id="@+id/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#88000000"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progress_spinner"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            style="?android:attr/progressBarStyleLarge"
+            android:indeterminate="true" />
+    </FrameLayout>
+
+    <!-- Empty state label -->
+    <TextView
+        android:id="@+id/empty_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Empty folder"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</RelativeLayout>
