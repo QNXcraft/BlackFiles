@@ -44,7 +44,7 @@ dependencies {
     compile 'eu.agno3.jcifs:jcifs-ng:2.1.6'
 
     // WebDAV — Sardine Android (uses HttpURLConnection, Java 7 compatible)
-    compile 'com.thegrizzlylabs.sardine-android:sardine-android:0.8'
+    compile 'com.github.thegrizzlylabs:sardine-android:0.8'
 
     // JSON serialization for prefs (org.json is available on API 18 already,
     // but we include a standalone copy for unit-testability outside Android)
