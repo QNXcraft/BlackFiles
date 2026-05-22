@@ -6,6 +6,8 @@ import com.thegrizzlylabs.sardineandroid.DavResource;
 import com.thegrizzlylabs.sardineandroid.Sardine;
 import com.thegrizzlylabs.sardineandroid.impl.OkHttpSardine;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -100,27 +102,28 @@ public class WebDavDriver implements RemoteDriver {
     }
 
     @Override
-    public synchronized OutputStream openOutputStream(String remotePath) throws IOException {
+    public synchronized OutputStream openOutputStream(final String remotePath) throws IOException {
         ensureConnected();
-        // sardine-android's put() accepts an InputStream; we buffer via a pipe
-        final java.io.PipedInputStream  pin  = new java.io.PipedInputStream(65536);
-        final java.io.PipedOutputStream pout = new java.io.PipedOutputStream(pin);
-        final String url = toUrl(remotePath);
 
-        // Sardine.put() blocks reading from pin; run on a separate thread
-        Thread putThread = new Thread(new Runnable() {
+        // sardine-android 0.8 does not support InputStream in put() due to OkHttp restrictions.
+        // We buffer to a temporary file and upload on close().
+        final File tempFile = File.createTempFile("webdav-upload", ".tmp");
+        return new FileOutputStream(tempFile) {
             @Override
-            public void run() {
+            public void close() throws IOException {
+                super.close();
                 try {
-                    sardine.put(url, pin, null);
-                } catch (IOException ignored) {}
+                    synchronized (WebDavDriver.this) {
+                        if (sardine != null) {
+                            sardine.put(toUrl(remotePath), tempFile, (String) null);
+                        }
+                    }
+                } finally {
+                    tempFile.delete();
+                }
+                cache.invalidate(parentOf(remotePath));
             }
-        });
-        putThread.setDaemon(true);
-        putThread.start();
-
-        cache.invalidate(parentOf(remotePath));
-        return pout;
+        };
     }
 
     @Override

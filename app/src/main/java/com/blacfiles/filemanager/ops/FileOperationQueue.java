@@ -212,7 +212,7 @@ public class FileOperationQueue {
     private RemoteDriver resolveDriver(FileItem item) {
         if (item.getProtocol() == FileItem.Protocol.LOCAL) return null;
         // Drivers are session-scoped; DriverFactory holds active sessions
-        return DriverFactory.getActiveDriver(item.getProtocol().name());
+        return DriverFactory.getActiveDriverByProtocol(item.getProtocol().name());
     }
 
     /** Returns a driver for a destination path based on the operation's context.
